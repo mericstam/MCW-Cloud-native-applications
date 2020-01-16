@@ -1650,6 +1650,8 @@ In this task, you will use Azure DevOps to automate the process for deploying th
 
 3. You will add a second job to the `Build and Push` stage, below the existing `Docker` job. Paste the following into the pipeline editor:
 
+**TODO:** Can this really be azureSubscription: 'azurecloud' ??
+
    > **Note**: Be careful to check your indenting when pasting. The `job` node should be indented with 2 spaces and line up with the `job` node for the `Docker` job.
 
    ```yaml
