@@ -1044,10 +1044,12 @@ image and pushes it to your ACR instance automatically.
 12. Visit your ACR instance in the Azure portal, you should see new containers
     tagged with the Azure DevOps build number.
 
-**TODO:** IMAGE SHOWS content-init as well, but its not described to add azurepipeline for it
-**TODO:** the image is wrong, version is 0.1.X
-
     ![A screenshot of the container images in ACR.](media/Ex1-Task7.28.png)
+
+
+**TODO:** IMAGE SHOWS content-init as well, but its not described to add azurepipeline for it
+
+**TODO:** the image is wrong, version is 0.1.X
 
 ## Exercise 2: Deploy the solution to Azure Kubernetes Service
 
