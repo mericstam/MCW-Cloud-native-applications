@@ -1651,6 +1651,9 @@ In this task, you will use Azure DevOps to automate the process for deploying th
 3. You will add a second job to the `Build and Push` stage, below the existing `Docker` job. Paste the following into the pipeline editor:
 
 **TODO:** Can this really be azureSubscription: 'azurecloud' ??
+- add to variables azureSubscriptionName: '[ARM_SERVICE_CONNECTION_NAME]'
+- change to use azureSubscription: '$(azureSubscriptionName)'
+
 
    > **Note**: Be careful to check your indenting when pasting. The `job` node should be indented with 2 spaces and line up with the `job` node for the `Docker` job.
 
@@ -1699,6 +1702,10 @@ In this task, you will use Azure DevOps to automate the process for deploying th
    ![A screenshot that shows the jobs, Helm is complete, Docker is still running](media/hol-2019-10-02_10-57-42.png)
 
 5. Now return to the pipeline editor to create a deployment stage. Paste the following into the pipeline editor and update the SUFFIX values:
+
+**TODO:** Can this really be azureSubscription: 'azurecloud' ??
+- add to variables azureSubscriptionName: '[ARM_SERVICE_CONNECTION_NAME]'
+- change to use azureSubscription: '$(azureSubscriptionName)'
 
    > **Note**: Be careful to check your indenting when pasting. The `stage` node should be indented with 0 spaces and line up with the `stage` node for the `Build` stage.
 
