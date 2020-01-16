@@ -1401,6 +1401,7 @@ In this task, deploy the web service using a helm chart.
     cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-web
     git pull
     ```
+**TODO:** SHouldnt this be pull from you repo in azure devops and not the labs files?
 
 7. We will use the `helm create` command to scaffold out a chart implementation that we can build on. Use the following commands to create a new chart named `web` in a new directory:
 
