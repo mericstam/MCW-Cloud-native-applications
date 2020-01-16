@@ -1567,6 +1567,8 @@ In this task, deploy the web service using a helm chart.
 
 In this task, you will use a Kubernetes Job to run a container that is meant to execute a task and terminate, rather than run all the time.
 
+**TODO:** Nowhere did we create a pipeline for content-init or push images to acr with content-init
+
 1. Create a text file called init.job.yml using the Azure Cloud Shell Editor.
 
    ```bash
