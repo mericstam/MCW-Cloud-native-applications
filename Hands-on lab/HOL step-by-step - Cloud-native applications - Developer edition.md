@@ -2085,6 +2085,8 @@ In this task, you will edit the web application source code to add Application I
    git pull
    ```
 
+**TODO:** This cant be correct. should we continue from exisitng repos in azure devops?
+
 3. Install support for Application Insights.
 
    ```bash
