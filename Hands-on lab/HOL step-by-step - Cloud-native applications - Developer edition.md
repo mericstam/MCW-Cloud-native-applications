@@ -1005,6 +1005,8 @@ image and pushes it to your ACR instance automatically.
 4. Now login to Azure DevOps to create your first build. Navigate to the
    `content-web` repository and choose 'Set up Build'.
 
+**TODO:** When you commit azure-pipelines.yml it will auto create the build, so no need to press setup build?
+
    ![A screenshot of the content-web repository with an arrow pointed at the Set up Build button](media/hol-2019-10-01_19-50-16.png)
 
 5. Azure DevOps will automatically detect the pipeline YAML you added. You can
