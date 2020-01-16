@@ -944,6 +944,8 @@ image and pushes it to your ACR instance automatically.
 
 2. Next create the pipeline YAML file.
 
+   **TODO:** Should create structured repo in ACR or the image in Exc 2.1 is wrong. refers to acr/fabmedical/content-api
+
    ```bash
    vi azure-pipelines.yml
    ```
