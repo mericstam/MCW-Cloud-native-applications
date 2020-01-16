@@ -1803,6 +1803,8 @@ In this task, you will access and review the various logs and dashboards made av
 
    ![Log entry details](media/monitor_7.png)
 
+**TODO:** talk about live data viewing and enabling it
+
 ## Exercise 3: Scale the application and test HA
 
 **Duration**: 20 minutes
