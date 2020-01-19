@@ -1386,10 +1386,14 @@ In this task, deploy the web service using a helm chart.
 
 5. Open a **new** Azure Cloud Shell console.
 
-6. Update your starter files by pulling the latest changes from Azure DevOps
+6. Clone / Pull changes from your Azure DevOps project for repo content-web in your cloud shell
 
     ```bash
-    cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-web
+    mkdir repos
+    cd repos/    
+    git clone https://[azure_devops_account_name]@dev.azure.com/[azure_devops_account_name]/[project_name]/_git/content-web
+    # You could clone all three - content-web, content-api, content-init since those will be updated / changed later
+    cd ./content-web
     git pull
     ```
 
@@ -1782,6 +1786,44 @@ In this task, you will access and review the various logs and dashboards made av
 
    ![Log entry details](media/monitor_7.png)
 
+10. (Optional) To enable Live Data Viewing, you can save the following into livedata.yml file and deploy it to kubernetes. 
+
+```bash
+apiVersion: rbac.authorization.k8s.io/v1 
+kind: ClusterRole 
+metadata: 
+   name: containerHealth-log-reader 
+rules: 
+    - apiGroups: ["", "metrics.k8s.io", "extensions", "apps"] 
+      resources: 
+         - "pods/log" 
+         - "events" 
+         - "nodes" 
+         - "pods" 
+         - "deployments" 
+         - "replicasets" 
+      verbs: ["get", "list"] 
+--- 
+apiVersion: rbac.authorization.k8s.io/v1 
+kind: ClusterRoleBinding 
+metadata: 
+   name: containerHealth-read-logs-global 
+roleRef: 
+   kind: ClusterRole 
+   name: containerHealth-log-reader 
+   apiGroup: rbac.authorization.k8s.io 
+subjects: 
+- kind: User 
+  name: clusterUser 
+  apiGroup: rbac.authorization.k8s.io
+```
+
+Deploy to kubernetes:
+
+```bash
+kubectl apply -f livedata.yml
+```
+
 ## Exercise 3: Scale the application and test HA
 
 **Duration**: 20 minutes
@@ -2055,12 +2097,16 @@ In this task, you will edit the web application source code to add Application I
 
    Copy this value. You will use it later.
 
-2. Update your starter files by pulling the latest changes from Azure DevOps.
+2. Clone / Pull changes from your Azure DevOps project for repo content-web in your cloud shell
 
-   ```bash
-   cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-web
-   git pull
-   ```
+    ```bash
+    mkdir repos
+    cd repos/    
+    git clone https://[azure_devops_account_name]@dev.azure.com/[azure_devops_account_name]/[project_name]/_git/content-web
+    # You could clone all three - content-web, content-api, content-init since those will be updated / changed later
+    cd ./content-web
+    git pull
+    ```
 
 3. Install support for Application Insights.
 
@@ -2113,7 +2159,7 @@ In this task you will setup a Kubernetes Ingress to take advantage of path-based
 1. Add the `nginx` repo.
 
    ```bash
-   helm repo add nginx https://helm.nginx.com/stable
+   helm repo add stable https://kubernetes-charts.storage.googleapis.com/
    ```
 
 2. Update your helm package list.
@@ -2125,10 +2171,17 @@ In this task you will setup a Kubernetes Ingress to take advantage of path-based
 3. Install the ingress controller resource to handle ingress requests as they come in. The ingress controller will receive a public IP of its own on the Azure Load Balancer and be able to handle requests for multiple services over port 80 and 443.
 
    ```bash
-   helm install ingress-controller nginx/nginx-ingress --namespace kube-system --set controller.replicaCount=2
+   helm install ingress-controller stable/nginx-ingress --namespace kube-system --set controller.replicaCount=2
    ```
 
 4. Set a DNS prefix on the IP address allocated to the ingress controller. Visit the `kube-system` namespace in your Kubernetes dashboard to find the IP. Append the following path after the `#!/` marker in the URL:
+
+   ```
+   kubectl get svc -n kube-system
+   # find the service named "ingress-controller" and see the external IP address for it (it may take a minute to have value)
+   ```
+
+   OR
 
    ```text
    service?namespace=kube-system
