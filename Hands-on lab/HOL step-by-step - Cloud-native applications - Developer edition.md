@@ -1372,28 +1372,22 @@ In this task, deploy the web service using `kubectl`.
 
 In this task, deploy the web service using a helm chart.
 
-1. From the Kubernetes dashboard, under "Workloads", select "Deployments".
+1. Open a **new** Azure Cloud Shell console.
 
-2. Select the triple vertical dots on the right of the "web" deployment and then choose "Delete". When prompted, select "Delete" again.
+2. Remove the resources created in the previous task. You can do this by using the same deployment files you used to create the resources. This will delete both the deployments (workloads) and services (load balancer) and anything else that is within the .yml file.
 
-   ![A screenshot of the Kubernetes management dashboard showing how to delete a deployment.](media/Ex2-Task4.2.png)
+    ```bash
+    kubectl delete -f web.deployment.yml -f web.service.yml
+    ```
 
-3. From the Kubernetes dashboard, under "Discovery and Load Balancing", select "Services".
-
-4. Select the triple vertical dots on the right of the "web" service and then choose "Delete". When prompted, select "Delete" again.
-
-   ![A screenshot of the Kubernetes management dashboard showing how to delete a deployment.](media/Ex2-Task4.4.png)
-
-5. Open a **new** Azure Cloud Shell console.
-
-6. Update your starter files by pulling the latest changes from Azure DevOps
+3. Update your starter files by pulling the latest changes from Azure DevOps
 
     ```bash
     cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-web
     git pull
     ```
 
-7. We will use the `helm create` command to scaffold out a chart implementation that we can build on. Use the following commands to create a new chart named `web` in a new directory:
+4.  We will use the `helm create` command to scaffold out a chart implementation that we can build on. Use the following commands to create a new chart named `web` in a new directory:
 
     ```bash
     mkdir charts
@@ -1401,14 +1395,14 @@ In this task, deploy the web service using a helm chart.
     helm create web
     ```
 
-8. We now need to update the generated scaffold to match our requirements. We will first update the file named `values.yaml`.
+5.  We now need to update the generated scaffold to match our requirements. We will first update the file named `values.yaml`.
 
     ```bash
     cd web
     code values.yaml
     ```
 
-9. Search for the `image` definition and update the values so that they match the following:
+6. Search for the `image` definition and update the values so that they match the following:
 
     ```yaml
     image:
@@ -1416,14 +1410,14 @@ In this task, deploy the web service using a helm chart.
       pullPolicy: Always
     ```
 
-10. Search for `nameOverride` and `fullnameOverride` entries and update the values so that they match the following:
+7. Search for `nameOverride` and `fullnameOverride` entries and update the values so that they match the following:
 
     ```yaml
     nameOverride: "web"
     fullnameOverride: "web"
     ```
 
-11. Search for the `service` definition and update the values so that they match the following:
+8. Search for the `service` definition and update the values so that they match the following:
 
     ```yaml
     service:
@@ -1431,7 +1425,7 @@ In this task, deploy the web service using a helm chart.
       port: 80
     ```
 
-12. Search for the `resources` definition and update the values so that they match the following:
+9.  Search for the `resources` definition and update the values so that they match the following:
 
     ```yaml
     resources:
@@ -1447,28 +1441,28 @@ In this task, deploy the web service using a helm chart.
         memory: 128Mi
     ```
 
-13. Save changes and close the editor.
+10. Save changes and close the editor.
 
-14. We will now update the file named `Chart.yaml`.
+11. We will now update the file named `Chart.yaml`.
 
     ```bash
     code Chart.yaml
     ```
 
-15. Search for the `appVersion` entry and update the value so that it matches the following:
+12. Search for the `appVersion` entry and update the value so that it matches the following:
 
     ```yaml
     appVersion: latest
     ```
 
-16. We will now update the file named `deployment.yaml`.
+13. We will now update the file named `deployment.yaml`.
 
     ```bash
     cd templates
     code deployment.yaml
     ```
 
-17. Search for the `metadata` definition and update the values so that they match the following:
+14. Search for the `metadata` definition and update the values so that they match the following:
 
     ```yaml
     apiVersion: apps/v1
@@ -1484,7 +1478,7 @@ In this task, deploy the web service using a helm chart.
             rollme: {{ randAlphaNum 5 | quote }}
     ```
 
-18. Search for the `containers` definition and update the values so that they match the following:
+15. Search for the `containers` definition and update the values so that they match the following:
 
     ```yaml
     containers:
@@ -1506,15 +1500,15 @@ In this task, deploy the web service using a helm chart.
             port: 3000
     ```
 
-19. Save changes and close the editor.
+16. Save changes and close the editor.
 
-20. We will now update the file named `service.yaml`.
+17. We will now update the file named `service.yaml`.
 
     ```bash
     code service.yaml
     ```
 
-21. Search for the `ports` definition and update the values so that they match the following:
+18. Search for the `ports` definition and update the values so that they match the following:
 
     ```yaml
     ports:
@@ -1524,9 +1518,9 @@ In this task, deploy the web service using a helm chart.
         name: http
     ```
 
-22. Save changes and close the editor.
+19. Save changes and close the editor.
 
-23. The chart is now setup to run our web container. Type the following command to deploy the application described by the YAML files. You will receive a message indicating that helm has created a web deployment and a web service.
+20. The chart is now setup to run our web container. Type the following command to deploy the application described by the YAML files. You will receive a message indicating that helm has created a web deployment and a web service.
 
     ```bash
     cd ../..
@@ -1535,15 +1529,15 @@ In this task, deploy the web service using a helm chart.
 
     ![In this screenshot of the console, helm install web ./web has been typed and run at the command prompt. Messages about web deployment and web service creation appear below.](media/Ex2-Task4.24.png)
 
-24. Return to the browser where you have the Kubernetes management dashboard open. From the navigation menu, select Services view under Discovery and Load Balancing. From the Services view, select the web service, and from this view, you will see the web service deploying. This deployment can take a few minutes. When it completes, you should be able to access the website via an external endpoint.
+21. Return to the browser where you have the Kubernetes management dashboard open. From the navigation menu, select Services view under Discovery and Load Balancing. From the Services view, select the web service, and from this view, you will see the web service deploying. This deployment can take a few minutes. When it completes, you should be able to access the website via an external endpoint.
 
     ![In the Kubernetes management dashboard, Services is selected below Discovery and Load Balancing in the navigation menu. At right are three boxes that display various information about the web service deployment: Details, Pods, and Events. "External endpoints" is highlighted to show that an external endpoint has been created.](media/image94.png)
 
-25. Select the speakers and sessions links. Note that no data is displayed, although we have connected to our Cosmos DB instance, there is no data loaded. You will resolve this by running the content-init application as a Kubernetes Job.
+23. Select the speakers and sessions links. Note that no data is displayed, although we have connected to our Cosmos DB instance, there is no data loaded. You will resolve this by running the content-init application as a Kubernetes Job.
 
     ![A screenshot of the web site showing no data displayed.](media/Ex2-Task3.11.png)
 
-26. We will now persist the changes into the repository. Execute the following commands:
+24. We will now persist the changes into the repository. Execute the following commands:
 
     ```bash
     cd ..
