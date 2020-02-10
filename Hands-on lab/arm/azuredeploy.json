@@ -5,7 +5,7 @@
         "Suffix": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 3
+            "maxLength": 8
         },
         "Location": {
             "type": "string",
@@ -377,7 +377,7 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2017-05-10",
-            "name": "[concat('ClusterMonitoringMetricPulisherRoleAssignmentDepl-fabmedical-', parameters('Suffix'))]",
+            "name": "[concat('ClusterMMPublisherRoleAssignmentDepl-fabmedical-', parameters('Suffix'))]",
             "dependsOn": [
                 "[concat('Microsoft.ContainerService/managedClusters/', variables('kubernetesClusterName'))]"
             ],
