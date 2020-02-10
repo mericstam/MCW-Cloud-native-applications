@@ -1386,14 +1386,10 @@ In this task, deploy the web service using a helm chart.
 
 5. Open a **new** Azure Cloud Shell console.
 
-6. Clone / Pull changes from your Azure DevOps project for repo content-web in your cloud shell
+6. Update your starter files by pulling the latest changes from Azure DevOps
 
     ```bash
-    mkdir repos
-    cd repos/    
-    git clone https://[azure_devops_account_name]@dev.azure.com/[azure_devops_account_name]/[project_name]/_git/content-web
-    # You could clone all three - content-web, content-api, content-init since those will be updated / changed later
-    cd ./content-web
+    cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-web
     git pull
     ```
 
@@ -2097,14 +2093,10 @@ In this task, you will edit the web application source code to add Application I
 
    Copy this value. You will use it later.
 
-2. Clone / Pull changes from your Azure DevOps project for repo content-web in your cloud shell
+2. Update your starter files by pulling the latest changes from Azure DevOps.
 
     ```bash
-    mkdir repos
-    cd repos/    
-    git clone https://[azure_devops_account_name]@dev.azure.com/[azure_devops_account_name]/[project_name]/_git/content-web
-    # You could clone all three - content-web, content-api, content-init since those will be updated / changed later
-    cd ./content-web
+    cd ~/MCW-Cloud-native-applications/Hands-on\ lab/lab-files/developer/content-web
     git pull
     ```
 
