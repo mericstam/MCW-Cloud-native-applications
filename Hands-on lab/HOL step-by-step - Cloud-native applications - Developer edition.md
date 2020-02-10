@@ -2162,13 +2162,6 @@ In this task you will setup a Kubernetes Ingress to take advantage of path-based
 
 3. Set a DNS prefix on the IP address allocated to the ingress controller. Visit the `kube-system` namespace in your Kubernetes dashboard to find the IP. Append the following path after the `#!/` marker in the URL:
 
-   ```
-   kubectl get svc -n kube-system
-   # find the service named "ingress-controller" and see the external IP address for it (it may take a minute to have value)
-   ```
-
-   OR
-
    ```text
    service?namespace=kube-system
    ```
