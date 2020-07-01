@@ -1,4 +1,4 @@
-name: 0.1.${{ env.Rev:r }}
+name: CI
 on:
   push:
     branches:
