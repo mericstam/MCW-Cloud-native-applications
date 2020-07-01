@@ -3,7 +3,7 @@ name: Content-init image CI
 on:
   push:
     branches: [ master ]
-    paths: 'Hands-on lab/lab-files/developer/content-init/*'
+    paths: 'Hands-on lab/lab-files/developer/content-init/**'
   pull_request:
     branches: [ master ]
 
