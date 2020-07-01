@@ -3,6 +3,7 @@ name: Content-web image CI
 on:
   push:
     branches: [ master ]
+    paths: 'lab/lab-files/developer/content-web*'
   pull_request:
     branches: [ master ]
 
