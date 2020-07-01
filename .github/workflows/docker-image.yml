@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build 'Hands-on lab/lab-files/developer/content-web/' --tag test:dev
+      run: docker build 'Hands-on lab/lab-files/developer/content-web/' --tag techlunchdemo.azurecr.io/test:dev
     - name: login to acr
       run: az acr login --name techlunchdemo --user techlunchdemo --password ${{ secrets.ACR_CRED }}
     - name: upload  
