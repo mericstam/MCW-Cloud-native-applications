@@ -1,0 +1,22 @@
+name: Content-init image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build 'Hands-on lab/lab-files/developer/content-init/' --tag techlunchdemo.azurecr.io/content-init:dev
+    - name: login to acr
+      run: az acr login --name techlunchdemo --user techlunchdemo --password ${{ secrets.ACR_CRED }}
+    - name: upload  
+      run: docker push techlunchdemo.azurecr.io/content-init:dev
