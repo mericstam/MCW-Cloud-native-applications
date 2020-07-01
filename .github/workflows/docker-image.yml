@@ -17,6 +17,6 @@ jobs:
     - name: Build the Docker image
       run: docker build 'Hands-on lab/lab-files/developer/content-web/' --tag test:$(date +%s)
     - name: login to acr
-      run: az acr login --name techlunchdemo
+      run: az acr login --name techlunchdemo --user techlunchdemo --password {{ ACR_CRED }} 
     - name: upload  
       run: docker push techlunchdemo.azurecr.io/test:$(date +%s)
