@@ -3,7 +3,7 @@ name: Content-api image CI
 on:
   push:
     branches: [ master ]
-    paths: 'Hands-on lab/lab-files/infrastructure/content-api*'
+    paths: 'Hands-on lab/lab-files/infrastructure/content-api/*'
   pull_request:
     branches: [ master ]
 
